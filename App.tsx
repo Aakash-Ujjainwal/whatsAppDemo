@@ -1,45 +1,17 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
-
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
+import { View } from 'react-native';
+import React, { useState } from 'react';
+import AppNavigator from './Src/Nevigation/AppNavigator';
+// import { SafeAreaView } from 'react-native-safe-area-context';
+import { PhoneContext } from './Src/Screens/Context/Context';
+const App = () => {
+  const [phoneNumber, setPhoneNumber] = useState('');
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
+    <PhoneContext.Provider value={{ phoneNumber, setPhoneNumber }}>
+      <View style={{ flex: 1 }}>
+        <AppNavigator />
+      </View>
+    </PhoneContext.Provider>
   );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+};
 
 export default App;
